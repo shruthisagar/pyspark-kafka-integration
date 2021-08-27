@@ -1,9 +1,10 @@
 ## This is readme file to run this demo. This has steps to run each command
 
-**_Connecting Spark, Kafka using python_**
-Tutorials used
+#Connecting Spark, Kafka using python
+_Tutorials used_
 
 - [Link 1](https://towardsdatascience.com/connecting-the-dots-python-spark-and-kafka-19e6beba6404)
+- [Link 2](https://www.youtube.com/watch?v=zVgPNjSjua0)
 
 Steps:
 
@@ -25,4 +26,5 @@ Steps:
 - coding for kafka-spark.py
 
   - command to run kafka-spark.py
-    - spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.0 kafka-spark.py
+    - spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.0 consumer1.py
+    - curl -d "hello world" -H "Content-Type: application/json" -X POST http://localhost:5000/

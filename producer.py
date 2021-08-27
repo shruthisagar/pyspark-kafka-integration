@@ -4,7 +4,8 @@ import json
 from datetime import datetime
 
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
-
-res = producer.send('kafka-spark', b'Hey yaako')
-
-producer.flush()
+def kafka_send_data(data):
+    
+    res = producer.send('kafka-spark', data)
+    producer.flush()
+    # logic to send to db can be written here

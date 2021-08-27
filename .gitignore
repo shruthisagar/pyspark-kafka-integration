@@ -1,3 +1,5 @@
 env/
 spark
 kafka
+__pycache__/
+6env/

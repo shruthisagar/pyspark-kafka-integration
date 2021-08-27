@@ -1,0 +1,1 @@
+<pyspark.streaming.dstream.TransformedDStream object at 0x7fbcef10b390>
