@@ -27,4 +27,5 @@ Steps:
 
   - command to run kafka-spark.py
     - spark-submit --packages org.apache.spark:spark-streaming-kafka-0-8_2.11:2.0.0 consumer1.py
+    - spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.1.2 streamer.py
     - curl -d "hello world" -H "Content-Type: application/json" -X POST http://localhost:5000/

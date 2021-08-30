@@ -14,6 +14,8 @@ sc = SparkContext(appName="kafka demo")
 ssc = StreamingContext(sc, 30)
 message = KafkaUtils.createDirectStream(ssc, topics=['kafka-spark'],
             kafkaParams={"metadata.broker.list":"localhost:9092"})
+data = json.loads(message)
+print(data)
 words = message.map(lambda x:x[1]).flatMap(lambda x: x.split(" "))
 wordcount = words.map(lambda x:(x,1)).reduceByKey(lambda a,b: a+b)
 
