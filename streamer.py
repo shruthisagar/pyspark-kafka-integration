@@ -31,28 +31,33 @@ if __name__ == "__main__":
                                 .add("privacy_settings", StringType())\
                                     .add("post_status", StringType())
 
-    # posts_schema = StructType(
-    #     [
-    #         StructField('id', IntegerType()),
-    #         StructField('status_update', StringType()),
-    #         StructField("created_time", StringType())
-    #     ]
-    # )
-    
-    
     posts_df2 = posts_df1.select(from_json(col("value"), posts_schema)\
         .alias("posts"), "timestamp")
     # posts_df2.printSchema()
+    posts_df3 = posts_df2.where(posts_df2['posts.post_status']=="active").select("posts.*", "timestamp")
     posts_df3 = posts_df2.select("posts.*", "timestamp")
     # posts_df3.writeStream.outputMode("append").format('console').start()
     posts_df4 = posts_df3.groupBy("created_by")\
         .agg({"created_by":"count"}).alias("posts")
-    
+    posts_df5 = posts_df3.groupBy("post_status").agg({"post_status":"count"}).alias("status_count")
     # posts_df4.printSchema()
+    posts_time = posts_df3.groupBy(year('created_time')).agg({"id":"count"}).alias("year_count")
 
     posts_stream = posts_df4.writeStream.trigger(processingTime='5 seconds')\
         .outputMode('update')\
             .option("truncate", "false")\
                 .format("console")\
                     .start()
+    post_status_stream =posts_df5.writeStream.trigger(processingTime='5 seconds')\
+        .outputMode('update')\
+            .option("truncate", "false")\
+                .format("console")\
+                    .start()
+    post_time_stream =posts_time.writeStream.trigger(processingTime='5 seconds')\
+        .outputMode('complete')\
+            .option("truncate", "false")\
+                .format("console")\
+                    .start()
     posts_stream.awaitTermination()
+    post_status_stream.awaitTermination()
+    post_time_stream.awaitTermination()
