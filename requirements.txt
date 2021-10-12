@@ -2,3 +2,4 @@ Flask
 findspark
 pyspark
 kafka-python
+confluent-kafka[avro]
