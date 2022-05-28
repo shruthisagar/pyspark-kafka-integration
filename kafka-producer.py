@@ -4,8 +4,8 @@ csv_data = csv.DictReader(open("./user_posts.csv"))
 posts_data = []
 for i in csv_data:
     posts_data.append(i)
+
 from kafka import KafkaProducer
-from datetime import datetime
 import time
 from json import dumps
 
