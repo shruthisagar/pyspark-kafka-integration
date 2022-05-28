@@ -39,7 +39,7 @@ Steps:
 
 - listening to a producer as a consumer
   - ./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic kafka-spark --from-beginning
-KV
+
 - deleting a topic
   - ./bin/kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic kafka-spark
 
